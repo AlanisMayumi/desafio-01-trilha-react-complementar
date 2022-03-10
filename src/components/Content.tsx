@@ -1,3 +1,4 @@
+import { List, ListRowRenderer } from "react-virtualized";
 import { MovieCard } from "./MovieCard";
 
 interface Rating {
@@ -8,15 +9,16 @@ interface Movie {
   imdbID: string;
   Title: string;
   Poster: string;
-  Runtime:string;
-  Ratings: Rating[]
+  Runtime: string;
+  Ratings: Rating[];
 }
 interface ContentProps {
   selectedGenre: {
     title: string;
-  }
-  movies: Movie[]
+  };
+  movies: Movie[];
 }
+
 export function Content(props: ContentProps) {
   return (
     <div className="container">

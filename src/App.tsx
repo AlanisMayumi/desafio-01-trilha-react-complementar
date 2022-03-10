@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Button } from "./components/Button";
 import { MovieCard } from "./components/MovieCard";
@@ -60,9 +60,14 @@ export function App() {
       });
   }, [selectedGenreId]);
 
-  function handleClickButton(id: number) {
+  const handleClickButton = useCallback((id: number) => {
     setSelectedGenreId(id);
-  }
+  }, []);
+
+  const contentMemo = useMemo(
+    () => <Content selectedGenre={selectedGenre} movies={movies} />,
+    [selectedGenre, movies]
+  );
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
@@ -71,7 +76,7 @@ export function App() {
         selectedGenreId={selectedGenreId}
         handleClickButton={handleClickButton}
       />
-      <Content selectedGenre={selectedGenre} movies={movies}/>
+      {contentMemo}
     </div>
   );
 }
